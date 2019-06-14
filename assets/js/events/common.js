@@ -58,12 +58,12 @@
                     <div class="margin">
                       <div class="form-group">
                         <label class="paper-check">
-                          <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (use all)</span>
+                          <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (Non-stop)</span>
                         </label>
                       </div>
                       <div class="form-group">
                         <label class="paper-check">
-                          <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error</span>
+                          <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error (Not recommended)</span>
                         </label>
                       </div>
                       <div class="form-group">
