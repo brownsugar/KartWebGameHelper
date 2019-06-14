@@ -6,6 +6,7 @@
   kwgh.config = {}
   kwgh.coupons = {}
 
+  /* Init */
   kwgh.init = ({ eventKey, date, play, load }) => {
     kwgh.eventKey = eventKey
     kwgh.config = kwgh.getStorage('config')
@@ -361,6 +362,15 @@
       const target = kwgh.el.q(el)
       target.scrollTop = target.scrollHeight
     }
+  }
+
+  /* Track */
+  kwgh.ev = (category, action, label = '', value = '') => {
+    gtag('event', action, {
+      event_category: category,
+      event_label: label,
+      value: value
+    })
   }
 
   window.kwgh = kwgh

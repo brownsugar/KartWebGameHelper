@@ -7,12 +7,6 @@
   "icons": {
     "128": "assets/img/icon.png"
   },
-  "background": {
-    "scripts": [
-      "assets/js/background.js"
-    ],
-    "persistent": false
-  },
   "content_scripts": [{
     "matches": [
       "*://kart.nexon.com/*",
@@ -26,5 +20,5 @@
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google-analytics.com; object-src 'self'",
   "homepage_url": "https://kartinfo.me",
   "permissions": [ "tabs", "storage", "notifications" ],
-  "web_accessible_resources": [ "vendor/*", "assets/img/*", "assets/js/events/*" ]
+  "web_accessible_resources": [ "vendor/*", "assets/img/*", "assets/js/*" ]
 }

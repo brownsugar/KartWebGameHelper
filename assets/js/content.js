@@ -25,11 +25,20 @@
 
   insertStyle('https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC', false)
   insertStyle('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap', false)
+  insertScript('https://www.googletagmanager.com/gtag/js?id=UA-17631526-18', false, true)
   insertInlineScript(`
-    const KWGH_VER = ${chrome.runtime.getManifest().version}
     const KWGH_URL = 'https://kartinfo.me'
+    const KWGH_VER = '${chrome.runtime.getManifest().version}'
+    const KWGH_UILANG = '${chrome.i18n.getUILanguage()}'
+  `)
+  insertInlineScript(`
+    window.dataLayer = window.dataLayer || []
+    function gtag() { dataLayer.push(arguments) }
+    gtag('js', new Date())
+    gtag('config', 'UA-17631526-18')
   `)
   insertScript('assets/js/events/common.js').then(() => {
+    insertScript('assets/js/analytics.js')
     if (kwghEvents[region].hasOwnProperty(year) && kwghEvents[region][year].indexOf(date) > -1) {
       insertScript(`assets/js/events/${region}/${year}/${date}.js`)
     }
@@ -45,10 +54,11 @@
     document.body.append(s)
   }
 
-  function insertScript(path, local = true) {
+  function insertScript(path, local = true, async = false) {
     return new Promise(resolve => {
       const s = document.createElement('script')
       s.src = local ? chrome.runtime.getURL(path) : path
+      s.async = async
       s.onload = resolve
       document.body.append(s)
     })

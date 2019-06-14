@@ -9,6 +9,7 @@
     load: load
   })
   kwgh.addCoupons(kwgh.coupons)
+  kwgh.ev('game', 'jewelry', 'count', parseInt(kwgh.el.q('.amount3').innerText))
 
   let isBusy = false
 
@@ -20,11 +21,14 @@
     }
     isBusy = true
     kwgh.loading()
+    kwgh.ev('game', 'play', 'click')
     if (kwgh.config.autoRun) {
       kwgh.btnLoading('#kwgh-btn-play', 'STOP', false)
+      kwgh.ev('game', 'play', 'autoRun', 1)
     }
     else {
       kwgh.btnLoading('#kwgh-btn-play', 'Working...')
+      kwgh.ev('game', 'play', 'autoRun', 0)
     }
 
     getCount = 0
@@ -65,6 +69,7 @@
           return
         }
         kwgh.message('success', `Working end. Got ${getCount} items.`)
+        kwgh.ev('game', 'play', 'getCount', getCount)
       }
       else {
         setTimeout(() => {
@@ -125,6 +130,7 @@
     isBusy = true
     kwgh.loading()
     kwgh.btnLoading('#kwgh-btn-load')
+    kwgh.ev('game', 'load', 'click')
 
     doLoad(1)
   }
@@ -148,6 +154,7 @@
         isBusy = false
         kwgh.loading(false)
         kwgh.btnLoading('#kwgh-btn-load', false)
+        kwgh.ev('game', 'load', 'totalItem', totalItem)
       }
     }).catch(message => {
       kwgh.message('error', message)
