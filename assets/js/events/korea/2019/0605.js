@@ -4,7 +4,7 @@
 
   kwgh.init({
     eventKey: EVENT_KEY,
-    date: '2019/06/14',
+    date: '2019/06/15',
     play: play,
     load: load
   })

@@ -27,9 +27,9 @@
   insertStyle('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap', false)
   insertScript('https://www.googletagmanager.com/gtag/js?id=UA-17631526-18', false, true)
   insertInlineScript(`
-    const KWGH_URL = 'https://kartinfo.me'
     const KWGH_VER = '${chrome.runtime.getManifest().version}'
     const KWGH_UILANG = '${chrome.i18n.getUILanguage()}'
+    const KWGH_URL = '${chrome.runtime.getManifest().homepage_url}'
   `)
   insertInlineScript(`
     window.dataLayer = window.dataLayer || []

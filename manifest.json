@@ -18,7 +18,7 @@
     "js": [ "assets/js/events.js", "assets/js/content.js" ]
   }],
   "content_security_policy": "script-src 'self' 'unsafe-eval' https://*.google-analytics.com; object-src 'self'",
-  "homepage_url": "https://kartinfo.me",
+  "homepage_url": "https://kartinfo.me/thread-6700-1-1.html",
   "permissions": [ "tabs", "storage", "notifications" ],
   "web_accessible_resources": [ "vendor/*", "assets/img/*", "assets/js/*" ]
 }
