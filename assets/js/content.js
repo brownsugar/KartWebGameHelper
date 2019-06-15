@@ -37,7 +37,7 @@
     gtag('js', new Date())
     gtag('config', 'UA-17631526-18')
   `)
-  insertScript('assets/js/events/common.js').then(() => {
+  insertScript('assets/js/events/kwgh.js').then(() => {
     insertScript('assets/js/events/analytics.js')
     if (kwghEvents[region].hasOwnProperty(year) && kwghEvents[region][year].indexOf(date) > -1) {
       insertScript(`assets/js/events/${region}/${year}/${date}.js`)
