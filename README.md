@@ -1,4 +1,4 @@
-# KartWebGameHelper
+# KartRider Web Game Helper
 Just an assistant for KartRider web-based games.
 
 [![Chrome](https://developer.chrome.com/webstore/images/ChromeWebStore_BadgeWBorder_v2_206x58.png)](https://kinf.cc/kwgh-chrome)
