@@ -234,7 +234,7 @@
     }
     else {
       const html = `<div class="form-group" data-item="${coupon.id}">
-                      <label popover-right="Copy all" onclick="this.nextElementSibling.select(); kwgh.copy(this.nextElementSibling.innerHTML, 'Coupons copied!')">${coupon.name}</label>
+                      <label popover-right="Copy all" onclick="this.nextElementSibling.select(); kwgh.copy(this.nextElementSibling.value, 'Coupons copied!')">${coupon.name}</label>
                       <textarea class="no-resize" placeholder="Nothing yet.">${coupon.sn}</textarea>
                     </div>`
       kwgh.el.append('.kwgh-coupon-group', html)
