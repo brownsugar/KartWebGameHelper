@@ -7,11 +7,12 @@
   kwgh.coupons = {}
 
   /* Init */
-  kwgh.init = ({ eventKey, date, play, load }) => {
+  kwgh.init = ({ eventKey, date, play, bonus, load }) => {
     kwgh.eventKey = eventKey
     kwgh.config = kwgh.getStorage('config')
     kwgh.coupons = kwgh.getStorage('coupons')
     kwgh.play = play
+    kwgh.bonus = bonus
     kwgh.load = load
 
     const kwghTemplate = `
@@ -68,6 +69,7 @@
                       </div>
                       <div class="form-group">
                         <button id="kwgh-btn-play" class="btn-secondary" onclick="kwgh.play()">Let's GO!</button>
+                        ${kwgh.bonus ? '<button id="kwgh-btn-bonus" class="btn-secondary" onclick="kwgh.bonus()">Get bonus!</button>' : ''}
                         <button id="kwgh-btn-load" class="btn-secondary" onclick="kwgh.askLoad()">Load coupons</button>
                         <button id="kwgh-btn-clear" class="btn-danger" onclick="kwgh.askClear()">Clear coupons</button>
                       </div>
@@ -166,6 +168,7 @@
       return $.ajax({
         url: url,
         type: 'POST',
+        contentType: 'application/json; charset=UTF-8',
         dataType: 'json',
         async: false,
         data: data,

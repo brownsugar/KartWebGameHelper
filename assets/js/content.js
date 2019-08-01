@@ -1,7 +1,7 @@
 (() => {
   const eventPageRegex = {
     korea: [/Events\/(\d+)\/(\d+)\//i],
-    taiwan: [],
+    taiwan: [/kartrider\/E(\d{4})(\d{4})\/index\./i],
     china: []
   }
 
@@ -18,8 +18,7 @@
     if (region) break
   }
 
-  // Currently only support KKR
-  if (region !== 'korea') return
+  if (!region) return
 
   const [, year, date] = window.location.pathname.match(regex)
 

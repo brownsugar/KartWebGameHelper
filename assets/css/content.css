@@ -15,6 +15,11 @@
   padding-bottom: 0;
   z-index: 999;
 }
+.kwgh-error .content,
+.kwgh-error .content h4,
+.kwgh-error .content p {
+  margin: 0;
+}
 .kwgh-wrap a {
   vertical-align: unset;
 }
@@ -139,8 +144,11 @@
   position: fixed;
   right: 15px;
   bottom: 75px;
-  z-index: 99;
+  z-index: 101;
 }
 .kwgh-toast .alert {
   margin-bottom: 0;
+}
+.kwgh-toast .alert .content {
+  margin: 0;
 }
