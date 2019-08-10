@@ -7,6 +7,9 @@
   "icons": {
     "128": "assets/img/icon.png"
   },
+  "background": {
+    "scripts": [ "assets/js/background.js" ]
+  },
   "content_scripts": [{
     "matches": [
       "*://kart.nexon.com/*",
