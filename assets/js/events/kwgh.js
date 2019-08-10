@@ -57,18 +57,22 @@
                   <label for="tab4">Coupon Group</label>
                   <div id="content1" class="content kwgh-config">
                     <div class="margin">
+                      ${kwgh.play || kwgh.bonus ? `
+                        <div class="form-group">
+                          <label class="paper-check">
+                            <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (Non-stop)</span>
+                          </label>
+                        </div>` : ''
+                      }
+                      ${kwgh.play || kwgh.bonus ? `
+                        <div class="form-group">
+                          <label class="paper-check">
+                            <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error (Not recommended)</span>
+                          </label>
+                        </div>` : ''
+                      }
                       <div class="form-group">
-                        <label class="paper-check">
-                          <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (Non-stop)</span>
-                        </label>
-                      </div>
-                      <div class="form-group">
-                        <label class="paper-check">
-                          <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error (Not recommended)</span>
-                        </label>
-                      </div>
-                      <div class="form-group">
-                        <button id="kwgh-btn-play" class="btn-secondary" onclick="kwgh.play()">Let's GO!</button>
+                        ${kwgh.play ? '<button id="kwgh-btn-play" class="btn-secondary" onclick="kwgh.play()">Let\'s GO!</button>' : ''}
                         ${kwgh.bonus ? '<button id="kwgh-btn-bonus" class="btn-secondary" onclick="kwgh.bonus()">Get bonus!</button>' : ''}
                         <button id="kwgh-btn-load" class="btn-secondary" onclick="kwgh.askLoad()">Load coupons</button>
                         <button id="kwgh-btn-clear" class="btn-danger" onclick="kwgh.askClear()">Clear coupons</button>
