@@ -21,6 +21,6 @@
     "js": [ "assets/js/events.js", "assets/js/content.js" ]
   }],
   "homepage_url": "https://kartinfo.me/thread-6700-1-1.html",
-  "permissions": [ "tabs", "storage", "notifications" ],
+  "permissions": [ "notifications" ],
   "web_accessible_resources": [ "vendor/*", "assets/img/*", "assets/js/*" ]
 }
