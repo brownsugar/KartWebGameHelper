@@ -168,14 +168,23 @@
 
   /* Ajax wrap */
   kwgh.ajax = {
-    post: (url, { data, success, error }) => {
+    post: (url, { type = 'form', data, success, error }) => {
+      const contentTypes = {
+        form: 'application/x-www-form-urlencoded',
+        json: 'application/json'
+      }
+      let payload = data
+      if (type == 'json') {
+        payload = JSON.stringify(data)
+      }
+
       return $.ajax({
         url: url,
         type: 'POST',
-        contentType: 'application/json; charset=UTF-8',
+        contentType: contentTypes[type] + '; charset=UTF-8',
         dataType: 'json',
         async: false,
-        data: data,
+        data: payload,
         success: success,
         error: error
       })

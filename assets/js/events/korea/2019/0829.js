@@ -154,7 +154,7 @@
       if (page < totalPage) {
         setTimeout(() => {
           doLoad(++page)
-        }, ajaxInterval)
+        }, requestInterval)
       }
       else {
         kwgh.message('success', `${totalItem} coupons have been loaded.`)

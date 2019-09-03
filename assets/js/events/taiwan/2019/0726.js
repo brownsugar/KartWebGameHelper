@@ -20,9 +20,10 @@
   async function keepSession() {
     if (!isBusy) {
       await kwgh.ajax.post('index.aspx/RefreshDice', {
-        data: JSON.stringify({
+        type: 'json',
+        data: {
           DoubleOpenFlag: kwgh.el.q('#DoubleOpenFlag').value
-        })
+        }
       })
     }
     setTimeout(keepSession, 30000)
@@ -137,9 +138,10 @@
       //   "d":"{\"code\":\"3\",\"message\":\"Success\",\"data\":\"3,16,19\",\"url\":\"\"}"
       // }
       kwgh.ajax.post('index.aspx/Dice', {
-        data: JSON.stringify({
+        type: 'json',
+        data: {
           DoubleOpenFlag: kwgh.el.q('#DoubleOpenFlag').value
-        }),
+        },
         success: result => {
           if (result != null) {
             try {
@@ -245,9 +247,10 @@
       //   "d": "{\"code\":\"1\",\"message\":\"Success\",\"data\":\"[{\\\"ItemID\\\":13520,\\\"ItemName\\\":\\\"夜爵9(永久)\\\",\\\"CreateDate\\\":\\\"2019-07-30 21:06\\\",\\\"SN\\\":\\\"0000000000000000000000000\\\"}]\",\"url\":\"\"}"
       // }
       kwgh.ajax.post('index.aspx/GetItem', {
-        data: JSON.stringify({
+        type: 'json',
+        data: {
           DoubleOpenFlag: kwgh.el.q('#DoubleOpenFlag').value
-        }),
+        },
         success: result => {
           if (result != null) {
             try {
@@ -318,9 +321,10 @@
       //    "d": "{\"code\":\"1\",\"message\":\"Success\",\"data\":\"[{\\\"Seq\\\":1993393,\\\"MainAccount\\\":\\\"XX\\\",\\\"ServiceAccount\\\":\\\"TE\\\",\\\"GashRegion\\\":\\\"TW\\\",\\\"SN\\\":\\\"0000000000000000000000000\\\",\\\"ItemID\\\":16463,\\\"ItemName\\\":\\\"小蜂蜜頭飾X50\\\",\\\"Type\\\":1,\\\"Flag\\\":1,\\\"CreateDate\\\":\\\"2019-08-01 14:56\\\",\\\"UpdateDate\\\":\\\"2019-08-01T14:56:20.92\\\"}]\",\"url\":\"\"}"
       // }
       kwgh.ajax.post('index.aspx/ShowList', {
-        data: JSON.stringify({
+        type: 'json',
+        data: {
           DoubleOpenFlag: kwgh.el.q('#DoubleOpenFlag').value
-        }),
+        },
         success: result => {
           if (result != null) {
             try {
