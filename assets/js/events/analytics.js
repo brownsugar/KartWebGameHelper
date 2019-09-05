@@ -1,6 +1,7 @@
 (() => {
   kwgh.ev('kwgh', 'ver', KWGH_VER)
   kwgh.ev('kwgh', 'lang', KWGH_UILANG)
+  kwgh.ev('kwgh', 'hostname', document.location.hostname)
 
   const getUserId = () => {
     let user, el

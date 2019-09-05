@@ -168,7 +168,7 @@
 
   /* Ajax wrap */
   kwgh.ajax = {
-    post: (url, { type = 'form', data, success, error }) => {
+    post: (url, { type = 'form', data, success, error } = {}) => {
       const contentTypes = {
         form: 'application/x-www-form-urlencoded',
         json: 'application/json'

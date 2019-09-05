@@ -1,15 +1,15 @@
 (() => {
   const eventPageRegex = {
-    korea: [/Events\/(\d+)\/(\d+)\//i],
-    taiwan: [/kartrider\/E(\d{4})(\d{4})\/(index|SearchItem)\./i],
-    china: []
+    korea: [/\/Events\/(\d+)\/(\d+)\//i],
+    taiwan: [/\/kartrider\/E(\d{4})(\d{4})\/(index|SearchItem)\./i],
+    china: [/evt0(\d)\.tiancity\.com\/kart\/(\d+)\//i]
   }
 
   let region, regex
   for (let key of Object.keys(eventPageRegex)) {
     const regexs = eventPageRegex[key]
     regexs.some(r => {
-      if (r.test(window.location.pathname)) {
+      if (r.test(window.location.href)) {
         region = key
         regex = r
         return true
@@ -20,7 +20,8 @@
 
   if (!region) return
 
-  const [, year, date] = window.location.pathname.match(regex)
+  // year = domain id, date = event id in PK
+  const [, year, date] = window.location.href.match(regex)
 
   insertStyle('https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC', false)
   insertStyle('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap', false)
