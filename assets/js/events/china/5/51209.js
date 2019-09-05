@@ -11,7 +11,7 @@
   let remainBonusEl
   kwgh.init({
     eventKey: EVENT_KEY,
-    date: '2019/09/03',
+    date: '2019/09/06',
     play: play,
     bonus: bonus,
     load: load
