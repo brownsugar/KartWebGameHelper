@@ -1,5 +1,5 @@
 (() => {
-  const EVENT_KEY = 'kwgh-taiwan-2019-0829'
+  const EVENT_KEY = 'kwgh-korea-2019-0829'
   const requestInterval = 600
   let isBusy = false
 

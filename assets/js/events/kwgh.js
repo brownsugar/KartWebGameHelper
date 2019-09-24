@@ -186,7 +186,9 @@
         async: false,
         data: payload,
         success: success,
-        error: error
+        error: error || function(request, status, error) {
+          return reject(`Network error.\nstatus: ${request.status}\nerror: ${error}`)
+        }
       })
     }
   }
