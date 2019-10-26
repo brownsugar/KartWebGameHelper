@@ -168,7 +168,7 @@
 
   /* Ajax wrap */
   kwgh.ajax = {
-    post: (url, { type = 'form', data, success, error } = {}) => {
+    post: (url, { type = 'form', data, dataType, success, error } = {}) => {
       const contentTypes = {
         form: 'application/x-www-form-urlencoded',
         json: 'application/json'
@@ -182,9 +182,9 @@
         url: url,
         type: 'POST',
         contentType: contentTypes[type] + '; charset=UTF-8',
-        dataType: 'json',
         async: false,
         data: payload,
+        dataType: dataType || 'json',
         success: success,
         error: error || function(request, status, error) {
           return reject(`Network error.\nstatus: ${request.status}\nerror: ${error}`)
