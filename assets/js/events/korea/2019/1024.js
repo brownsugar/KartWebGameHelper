@@ -1,6 +1,6 @@
 (() => {
   const EVENT_KEY = 'kwgh-korea-2019-1024'
-  const playCoinConsume = 4
+  const playCoinConsume = 2
   const requestInterval = 600
   let isBusy = false
 
