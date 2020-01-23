@@ -29,7 +29,6 @@
   insertInlineScript(`
     const KWGH_VER = '${chrome.runtime.getManifest().version}'
     const KWGH_UILANG = '${chrome.i18n.getUILanguage()}'
-    const KWGH_URL = '${chrome.runtime.getManifest().homepage_url}'
   `)
   insertInlineScript(`
     window.dataLayer = window.dataLayer || []

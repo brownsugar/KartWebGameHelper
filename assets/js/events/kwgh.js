@@ -126,7 +126,7 @@
                 <li>Released on ${date}.</li>
                 <li>Developed by <span><a href="https://brownsugar.tw" target="_blank">Brownsugar</a>.</li>
                 <li>Published on <a href="https://kartinfo.me" target="_blank">KartInfo</a>.</li>
-                <li>You can see more details <a href="${KWGH_URL}" target="_blank">here</a>.</li>
+                <li>You can see more details <a href="https://kinf.cc/2unSmZc" target="_blank">here</a>.</li>
                 <li>Awesome theme by <a href="https://github.com/papercss/papercss" target="_blank">PaperCSS</a>.</li>
               </ul>
             </div>
