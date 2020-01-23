@@ -8,6 +8,11 @@
   line-height: normal;
   padding-bottom: 60px; /* Nav height */
 }
+.kwgh-wrap .btn-close {
+  background: none;
+  text-indent: 0;
+  overflow: visible;
+}
 .kwgh-error {
   position: fixed;
   left: 15px;
