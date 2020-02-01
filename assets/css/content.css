@@ -41,6 +41,7 @@
 .kwgh-wrap nav.fixed {
   top: auto;
   bottom: 0;
+  height: 60px;
   z-index: 9999;
 }
 .kwgh-wrap nav label {
@@ -150,6 +151,10 @@
   right: 15px;
   bottom: 75px;
   z-index: 101;
+}
+.kwgh-league .kwgh-toast {
+  left: 15px;
+  right: auto;
 }
 .kwgh-toast .alert {
   margin-bottom: 0;

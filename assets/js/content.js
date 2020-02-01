@@ -1,6 +1,6 @@
 (() => {
   const eventPageRegex = {
-    korea: [/\/Events\/(\d+)\/(\d+)\//i],
+    korea: [/\/Events\/(\d+)\/(\d+)\//i, /\/League\/(\d+)\/([^/]+)\/Media/i],
     taiwan: [/\/kartrider\/E(\d{4})(\d{4})\/(index|SearchItem)\./i],
     china: [/evt0(\d)\.tiancity\.com\/kart\/(\d+)\//i]
   }
@@ -20,6 +20,7 @@
 
   if (!region) return
 
+  // date = league season in KKR
   // year = domain id, date = event id in PK
   const [, year, date] = window.location.href.match(regex)
 
@@ -38,7 +39,7 @@
   `)
   insertScript('assets/js/events/kwgh.js').then(() => {
     insertScript('assets/js/events/analytics.js')
-    if (kwghEvents[region].hasOwnProperty(year) && kwghEvents[region][year].indexOf(date) > -1) {
+    if (kwghEvents[region].hasOwnProperty(year) && kwghEvents[region][year].includes(date)) {
       insertScript(`assets/js/events/${region}/${year}/${date}.js`)
     }
     else {

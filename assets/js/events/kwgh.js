@@ -6,6 +6,11 @@
   kwgh.config = {}
   kwgh.coupons = {}
 
+  /* Core request */
+  kwgh.play = undefined
+  kwgh.bonus = undefined
+  kwgh.load = undefined
+
   /* Init */
   kwgh.init = ({ eventKey, date, play, bonus, load }) => {
     kwgh.eventKey = eventKey
@@ -15,11 +20,91 @@
     kwgh.bonus = bonus
     kwgh.load = load
 
+    const canPlay = !!play || !!bonus
+    const leagueMode = !load
+
+    const gameDialog = !leagueMode ? `
+      <div class="kwgh-dialog">
+        <div class="collapsible">
+          <input id="collapsible-kwgh-dialog" type="checkbox" name="collapsible-kwgh-dialog" />
+          <div class="collapsible-body">
+            <div class="collapsible-content border border-4 border-primary">
+              <div class="tabs">
+                <input type="radio" name="kwgh-tabs" id="tab1" checked />
+                <label for="tab1">Config</label>
+                <input type="radio" name="kwgh-tabs" id="tab2" />
+                <label for="tab2">Item & Coupon</label>
+                <input type="radio" name="kwgh-tabs" id="tab3" />
+                <label for="tab3">Coupon Only</label>
+                <input type="radio" name="kwgh-tabs" id="tab4" />
+                <label for="tab4">Coupon Group</label>
+                <div id="content1" class="content kwgh-config">
+                  <div class="margin">
+                    ${canPlay ? `
+                      <div class="form-group">
+                        <label class="paper-check">
+                          <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (Non-stop)</span>
+                        </label>
+                      </div>
+                      <div class="form-group">
+                        <label class="paper-check">
+                          <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error (Not recommended)</span>
+                        </label>
+                      </div>` : ''
+                    }
+                    <div class="form-group">
+                      ${!!play ? '<button id="kwgh-btn-play" class="btn-secondary" onclick="kwgh.play()">Let\'s GO!</button>' : ''}
+                      ${!!bonus ? '<button id="kwgh-btn-bonus" class="btn-secondary" onclick="kwgh.bonus()">Get bonus!</button>' : ''}
+                      <button id="kwgh-btn-load" class="btn-secondary" onclick="kwgh.askLoad()">Load coupons</button>
+                      <button id="kwgh-btn-clear" class="btn-danger" onclick="kwgh.askClear()">Clear coupons</button>
+                    </div>
+                  </div>
+                </div>
+                <div id="content2" class="content kwgh-coupon-list">
+                  <table>
+                    <thead>
+                      <tr>
+                        <th>#</th>
+                        <th>Item</th>
+                        <th>Coupon (Click to copy)</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr class="kwgh-empty-content">
+                        <td colspan="3">Nothing yet.</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+                <div id="content3" class="content kwgh-coupon-sn">
+                  <div class="form-group margin-bottom-small">
+                    <label popover-right="Copy all" onclick="this.nextElementSibling.select(); kwgh.copy(this.nextElementSibling.value, 'Coupons copied!')">Coupon list</label>
+                    <textarea class="no-resize fix-height" placeholder="Nothing yet."></textarea>
+                  </div>
+                  <div class="alert alert-secondary margin-none padding-small">
+                    💡 Tip: Use this coupon list with <a href="https://kinf.cc/2XHvUnv" target="_blank">KartAutoRedeem</a>!
+                  </div>
+                </div>
+                <div id="content4" class="content kwgh-coupon-group">
+                  <div class="kwgh-empty-content">
+                    <p>Nothing yet.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      ` : ''
     const kwghTemplate = `
-      <div id="kwgh" class="kwgh-wrap ${kwgh.eventKey}">
+      <div id="kwgh" class="kwgh-wrap ${kwgh.eventKey}${leagueMode ? ' kwgh-league' : ''}">
         <nav class="border fixed split-nav">
           <div class="nav-brand">
-            <h3><label for="collapsible-kwgh-dialog"><a>Get started</a></label></h3>
+            <h3>
+              ${!leagueMode ?
+                '<label for="collapsible-kwgh-dialog"><a>Get started</a></label>' :
+                'League Mode'}
+            </h3>
           </div>
           <div class="progress kwgh-loading">
             <div class="bar striped muted animated"></div>
@@ -41,79 +126,7 @@
             </div>
           </div>
         </nav>
-        <div class="kwgh-dialog">
-          <div class="collapsible">
-            <input id="collapsible-kwgh-dialog" type="checkbox" name="collapsible-kwgh-dialog" />
-            <div class="collapsible-body">
-              <div class="collapsible-content border border-4 border-primary">
-                <div class="tabs">
-                  <input type="radio" name="kwgh-tabs" id="tab1" checked />
-                  <label for="tab1">Config</label>
-                  <input type="radio" name="kwgh-tabs" id="tab2" />
-                  <label for="tab2">Item & Coupon</label>
-                  <input type="radio" name="kwgh-tabs" id="tab3" />
-                  <label for="tab3">Coupon Only</label>
-                  <input type="radio" name="kwgh-tabs" id="tab4" />
-                  <label for="tab4">Coupon Group</label>
-                  <div id="content1" class="content kwgh-config">
-                    <div class="margin">
-                      ${kwgh.play || kwgh.bonus ? `
-                        <div class="form-group">
-                          <label class="paper-check">
-                            <input type="checkbox" name="kwgh-autoRun" onclick="kwgh.optionChanged(this)"${kwgh.config.autoRun !== false ? ' checked' : ''} /> <span>Auto run (Non-stop)</span>
-                          </label>
-                        </div>` : ''
-                      }
-                      ${kwgh.play || kwgh.bonus ? `
-                        <div class="form-group">
-                          <label class="paper-check">
-                            <input type="checkbox" name="kwgh-ignoreError" onclick="kwgh.optionChanged(this)"${kwgh.config.ignoreError === true ? ' checked' : ''} /> <span>Ignore error (Not recommended)</span>
-                          </label>
-                        </div>` : ''
-                      }
-                      <div class="form-group">
-                        ${kwgh.play ? '<button id="kwgh-btn-play" class="btn-secondary" onclick="kwgh.play()">Let\'s GO!</button>' : ''}
-                        ${kwgh.bonus ? '<button id="kwgh-btn-bonus" class="btn-secondary" onclick="kwgh.bonus()">Get bonus!</button>' : ''}
-                        <button id="kwgh-btn-load" class="btn-secondary" onclick="kwgh.askLoad()">Load coupons</button>
-                        <button id="kwgh-btn-clear" class="btn-danger" onclick="kwgh.askClear()">Clear coupons</button>
-                      </div>
-                    </div>
-                  </div>
-                  <div id="content2" class="content kwgh-coupon-list">
-                    <table>
-                      <thead>
-                        <tr>
-                          <th>#</th>
-                          <th>Item</th>
-                          <th>Coupon (Click to copy)</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <tr class="kwgh-empty-content">
-                          <td colspan="3">Nothing yet.</td>
-                        </tr>
-                      </tbody>
-                    </table>
-                  </div>
-                  <div id="content3" class="content kwgh-coupon-sn">
-                    <div class="form-group margin-bottom-small">
-                      <label popover-right="Copy all" onclick="this.nextElementSibling.select(); kwgh.copy(this.nextElementSibling.value, 'Coupons copied!')">Coupon list</label>
-                      <textarea class="no-resize fix-height" placeholder="Nothing yet."></textarea>
-                    </div>
-                    <div class="alert alert-secondary margin-none padding-small">
-                      💡 Tip: Use this coupon list with <a href="https://kinf.cc/2XHvUnv" target="_blank">KartAutoRedeem</a>!
-                    </div>
-                  </div>
-                  <div id="content4" class="content kwgh-coupon-group">
-                    <div class="kwgh-empty-content">
-                      <p>Nothing yet.</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
+        ${gameDialog}
         <div class="kwgh-modal">
           <input type="checkbox" id="kwgh-about" class="modal-state" />
           <div class="modal">
@@ -161,10 +174,6 @@
     kwgh.config[name] = el.checked
     kwgh.setStorage('config', kwgh.config)
   }
-
-  /* Core request */
-  kwgh.play = () => {}
-  kwgh.load = () => {}
 
   /* Ajax wrap */
   kwgh.ajax = {
@@ -287,7 +296,12 @@
   }
 
   kwgh.getStorage = name => {
-    return JSON.parse(localStorage.getItem(`${kwgh.eventKey}-${name}`)) || {}
+    try {
+      return JSON.parse(localStorage.getItem(`${kwgh.eventKey}-${name}`)) || {}
+    }
+    catch (e) {
+      return {}
+    }
   }
 
   kwgh.clearStorage = name => {
@@ -305,7 +319,7 @@
     kwgh.el.q('#kwgh-message').checked = true
   }
 
-  kwgh.copy = (text, success = 'Copied!') => {
+  kwgh.copy = (text, successText = 'Copied!') => {
     const handler = e => {
       e.clipboardData.setData('text/plain', text)
       e.preventDefault()
@@ -313,7 +327,7 @@
     }
     document.addEventListener('copy', handler, true)
     document.execCommand('copy')
-    kwgh.toast('success', success)
+    kwgh.toast('success', successText)
   }
 
   let toastTimer = null
@@ -331,11 +345,13 @@
       content.innerHTML = text
       checkbox.checked = false
 
-      clearTimeout(toastTimer)
-      toastTimer = setTimeout(() => {
-        checkbox.checked = true
-        toastTimer = null
-      }, timeout)
+      if (timeout > 0) {
+        clearTimeout(toastTimer)
+        toastTimer = setTimeout(() => {
+          checkbox.checked = true
+          toastTimer = null
+        }, timeout)
+      }
     }, delay)
   }
 
