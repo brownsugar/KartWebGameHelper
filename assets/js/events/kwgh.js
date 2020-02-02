@@ -290,17 +290,54 @@
     }
   }
 
-  /* LocalStorage */
-  kwgh.setStorage = (name, data) => {
-    localStorage.setItem(`${kwgh.eventKey}-${name}`, JSON.stringify(data))
+  /* Dismiss messages */
+  const dismissKey = 'kwgh'
+  const dismissName = 'dismiss'
+  kwgh.setDismiss = path => {
+    let data = kwgh.getDismiss()
+
+    const index = data.findIndex(d => d.path === path)
+    const time = (new Date()).getTime()
+    if (index > -1) {
+      data[index].time = time
+    }
+    else {
+      data.push({
+        path,
+        time: time
+      })
+    }
+    kwgh.setStorage(dismissName, data, dismissKey)
   }
 
-  kwgh.getStorage = name => {
+  kwgh.getDismiss = () => {
+    return kwgh.getStorage(dismissName, dismissKey, [])
+  }
+
+  kwgh.isDismiss = path => {
+    let data = kwgh.getDismiss()
+
+    const index = data.findIndex(d => d.path === path)
+    const time = (new Date()).getTime()
+    const limit = 24 * 60 * 60 * 1000 // 1 day
+    // const limit = 60 * 1000 // 1 minute
+    if (index > -1) {
+      return time - data[index].time < limit
+    }
+    return false
+  }
+
+  /* LocalStorage */
+  kwgh.setStorage = (name, data, key = kwgh.eventKey) => {
+    localStorage.setItem(`${key}-${name}`, JSON.stringify(data))
+  }
+
+  kwgh.getStorage = (name, key = kwgh.eventKey, defaultValue = {}) => {
     try {
-      return JSON.parse(localStorage.getItem(`${kwgh.eventKey}-${name}`)) || {}
+      return JSON.parse(localStorage.getItem(`${key}-${name}`)) || defaultValue
     }
     catch (e) {
-      return {}
+      return defaultValue
     }
   }
 
@@ -338,6 +375,7 @@
         content = kwgh.el.q('.kwgh-toast .content')
     checkbox.checked = true
 
+    // 200 = transition duration
     const delay = toastTimer ? 200 : 0
     setTimeout(() => {
       alert.className = alert.className.replace(/alert-(\w+)/i, '').trim()
