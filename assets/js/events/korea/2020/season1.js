@@ -38,13 +38,13 @@
       const emblem = document.querySelector('.emblem a')
       if (emblemWrap.style.display !== 'none' && emblem !== null) {
         window.emblemEventApply(emblem)
-        const emblemGot = document.querySelectorAll('.emb_list .emb_get').length
-        if (emblemGot === 4) {
-          clearInterval(interval)
-          kwgh.toast('success', 'Done! You\'ve collected 4 league emblems.', 0)
-          kwgh.loading(false)
-          return
-        }
+      }
+      const emblemGot = document.querySelectorAll('.emb_list .emb_get').length
+      if (emblemGot === 4) {
+        clearInterval(interval)
+        kwgh.toast('success', 'Done! You\'ve collected 4 league emblems.', 0)
+        kwgh.loading(false)
+        return
       }
     }, 5000)
   }
