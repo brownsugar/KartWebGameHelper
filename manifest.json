@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "KartRider Web Game Helper",
   "short_name": "KartWebGameHelper",
-  "version": "0.10.0",
+  "version": "0.11.0",
   "description": "Just an assistant for KartRider web-based games.",
   "icons": {
     "128": "assets/img/icon.png"
