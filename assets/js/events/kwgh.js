@@ -463,8 +463,8 @@
 
   /* Utils */
   kwgh.el = {
-    q: el => document.querySelector(el),
-    qa: el => document.querySelectorAll(el),
+    q: (el, parent = null) => (parent || document).querySelector(el),
+    qa: (el, parent = null) => (parent || document).querySelectorAll(el),
     hide: (el, hide = true) => {
       [...kwgh.el.qa(el)].forEach(el => el.style.display = hide ? 'none' : '')
     },
