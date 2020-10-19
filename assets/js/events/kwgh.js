@@ -294,18 +294,17 @@
   kwgh.leagueMode = () => {
     const isLogin = !!kwgh.el.q('#gnbMyInfo') || // NEXON
                     !!kwgh.el.q('.nick') // NAVER
-    if (!isLogin) {
-      kwgh.toast('danger', 'Please login first!', 0)
-      return
-    }
 
     const isLive = window.isLiveVod
-    // Check if live event starts
-    if (!isLive) {
-      const limit = 300
+
+    // Check if is logined or live event starts
+    if (!isLogin || !isLive) {
+      const limit = 60
       let count = 0
       const interval = setInterval(() => {
-        kwgh.toast('secondary', `Waiting for the live event starts...<br />Page will refresh in ${limit - count}s.`, 0)
+        const type = !isLogin ? 'danger' : 'secondary'
+        const message = !isLogin ? 'Please login first!' : 'Waiting for the live event starts...'
+        kwgh.toast(type, `${message}<br />Page will refresh in ${limit - count}s.`, 0)
         count++
         if (count > limit) {
           clearInterval(interval)
