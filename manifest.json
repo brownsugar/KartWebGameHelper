@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "KartRider Web Game Helper",
   "short_name": "KartWebGameHelper",
-  "version": "0.14.0",
+  "version": "0.15.0",
   "description": "Just an assistant for KartRider web-based games.",
   "icons": {
     "128": "assets/img/icon.png"
@@ -21,7 +21,8 @@
       "*://evt05.tiancity.com/*"
     ],
     "css": [ "vendor/PaperCSS/paper.min.css", "assets/css/content.css" ],
-    "js": [ "assets/js/events.js", "assets/js/content.js" ]
+    "js": [ "assets/js/events.js", "assets/js/content.js" ],
+    "all_frames": true
   }],
   "homepage_url": "https://kinf.cc/2tAV2Tr",
   "permissions": [ "notifications" ],
