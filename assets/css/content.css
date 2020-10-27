@@ -35,6 +35,9 @@
 .kwgh-wrap ul {
   padding-left: 15px;
 }
+.kwgh-wrap button {
+  text-indent: 0;
+}
 .kwgh-empty-content {
   text-align: center;
 }

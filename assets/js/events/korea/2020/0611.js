@@ -44,16 +44,16 @@
   function doPlay() {
     let error = false
 
-      // {
-      //   "returnCode": 0,
-      //   "returnMsg": "",
-      //   "CouponNo": "00000-00000-00000-00000-00000",
-      //   "ItemName": "마법 전자파밴드 (30개)",
-      //   "ItemNo": 20,
-      //   "InGameCoin": 24,
-      //   "WebUseCoin": 2,
-      //   "EventCoin": 22
-      // }
+    // {
+    //   "returnCode": 0,
+    //   "returnMsg": "",
+    //   "CouponNo": "00000-00000-00000-00000-00000",
+    //   "ItemName": "마법 전자파밴드 (30개)",
+    //   "ItemNo": 20,
+    //   "InGameCoin": 24,
+    //   "WebUseCoin": 2,
+    //   "EventCoin": 22
+    // }
     playRequest().then(data => {
       // Change page data
       remainCoin = data.EventCoin
