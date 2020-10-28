@@ -14,11 +14,12 @@
 
   const playErrorRegex = /Event201022Apply\(AppyBingoIdx\) {\s+LayerOpen\(\"(.+)\"\);/i
   const loadErrorRegex = /LayerOpen\(\"(.+)\"\);/i
-  let remainCoinEl = kwgh.el.q('.ableCoin')
-  let totalCoinEl = kwgh.el.q('.getCoin')
-  let remainCoin = Number(remainCoinEl.innerText)
-  let totalCoin = Number(totalCoinEl.innerText)
-  kwgh.ev(EVENT_KEY, 'jewelry', 'count', totalCoin)
+  let remainCoinEl
+  let totalCoinEl
+  let remainCoin
+  let totalCoin
+
+  loadBingoContent(true)
 
   const bingoSets = [
     [1, 6, 11, 16],
@@ -47,6 +48,18 @@
       }
     })
     return lines
+  }
+  function loadBingoContent(first = false) {
+    $('#bingoContent').load('event_bingo.aspx', () => {
+      remainCoinEl = kwgh.el.q('.ableCoin')
+      totalCoinEl = kwgh.el.q('.getCoin')
+
+      if (first) {
+        remainCoin = Number(remainCoinEl.innerText || 0)
+        totalCoin = Number(totalCoinEl.innerText || 0)
+        kwgh.ev(EVENT_KEY, 'jewelry', 'count', totalCoin)
+      }
+    })
   }
 
   let getCount
@@ -90,10 +103,7 @@
 
       // Load new bingo numbers
       if (bingoNum == 0) {
-        $('#bingoContent').load('event_bingo.aspx', () => {
-          remainCoinEl = kwgh.el.q('.ableCoin')
-          totalCoinEl = kwgh.el.q('.getCoin')
-        })
+        loadBingoContent()
       }
       // Get bingo line rewards
       else if (bingoNum > 100) {
