@@ -129,7 +129,7 @@
           if (activeLines[lineIdx]) {
             const line = kwgh.el.q('.b' + lineIdx)
             line.classList.add('active')
-            const idx = '1' + (lineIdx < 10 ? '0' : '') + bingoNum
+            const idx = '1' + (lineIdx < 10 ? '0' : '') + lineIdx
             line.innerHTML = '<button type="button" onclick="Event201022Apply(' + idx + ')"></button>'
           }
         })
@@ -232,7 +232,9 @@
       //   "EventCoin": 0,
       //   "BingoNum": 110
       // }
-      let idx = kwgh.el.qa('li[data-bingonum].active').length === 16 ? 0 : 1
+      const isFirst = kwgh.el.q('li[data-bingonum]').classList.length === 0
+      const numsActive = kwgh.el.qa('li[data-bingonum].active')
+      let idx = isFirst || numsActive.length === 16 ? 0 : 1
       const bingoLines = kwgh.el.qa('.btns .active')
       if (bingoLines.length) {
         const el = bingoLines[0]
