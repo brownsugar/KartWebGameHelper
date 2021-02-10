@@ -13,7 +13,6 @@
   "content_scripts": [{
     "matches": [
       "*://kart.nexon.com/*",
-      "*://kart.nexon.game.naver.com/*",
       "*://tw.beanfun.com/*",
       "*://event.beanfun.com/*",
       "*://popkart.tiancity.com/*",
