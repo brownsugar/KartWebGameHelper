@@ -143,6 +143,8 @@
 }
 /* Modal */
 .kwgh-wrap .modal {
+  display: block;
+  padding: 0;
   z-index: 99999999;
 }
 .kwgh-wrap .kwgh-modal .modal-body {
