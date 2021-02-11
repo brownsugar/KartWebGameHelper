@@ -101,7 +101,7 @@
         }
 
         if(kwgh.config.autoRun === false) {
-          kwgh.toast('secondary', 'Added an tire.')
+          kwgh.toast('secondary', 'Added a tire.')
         }
         return
       }
