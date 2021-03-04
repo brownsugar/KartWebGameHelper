@@ -7,9 +7,9 @@
   kwgh.coupons = {}
 
   /* Core request */
-  kwgh.play = undefined
-  kwgh.bonus = undefined
-  kwgh.load = undefined
+  kwgh.play = null
+  kwgh.bonus = null
+  kwgh.load = null
 
   /* Init */
   kwgh.init = ({ eventKey, date, play, bonus, load }) => {
