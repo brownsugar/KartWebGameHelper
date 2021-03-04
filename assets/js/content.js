@@ -22,7 +22,9 @@
 
   // date = league season in KKR
   // year = domain id, date = event id in PK
-  const [, year, date] = window.location.href.match(regex)
+  let [, year, date] = window.location.href.match(regex)
+  year = year.toLowerCase()
+  date = date.toLowerCase()
 
   insertStyle('https://fonts.googleapis.com/css?family=Neucha|Patrick+Hand+SC', false)
   insertStyle('https://fonts.googleapis.com/css?family=Noto+Sans+KR&display=swap', false)
