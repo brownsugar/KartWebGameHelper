@@ -11,6 +11,7 @@
 }
 .kwgh-wrap a {
   color: #41403e;
+  display: inline;
 }
 .kwgh-wrap .btn-close {
   background: none;

@@ -196,7 +196,7 @@
         dataType: dataType || 'json',
         success: success,
         error: error || function(request, status, error) {
-          return reject(`Network error.\nstatus: ${request.status}\nerror: ${error}`)
+          return Promise.reject(`Network error.\nstatus: ${request.status}\nerror: ${error}`)
         }
       })
     }
