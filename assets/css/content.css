@@ -23,7 +23,7 @@
   left: 15px;
   bottom: 15px;
   padding-bottom: 0;
-  z-index: 999;
+  z-index: 9999;
 }
 .kwgh-error .content,
 .kwgh-error .content h4,
