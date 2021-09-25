@@ -28,7 +28,7 @@
     isBusy = true
     kwgh.loading()
     kwgh.ev(EVENT_KEY, 'play', 'click')
-    if (kwgh.config.autoRun) {
+    if (kwgh.config.autoRun !== false) {
       kwgh.btnLoading('#kwgh-btn-play', 'STOP', false)
       kwgh.ev(EVENT_KEY, 'play', 'autoRun', 1)
     }
@@ -78,18 +78,18 @@
       kwgh.setCoupon(coupon)
       getCount++
 
-      if(!kwgh.config.autoRun) {
+      if(kwgh.config.autoRun === false) {
         kwgh.toast('secondary', `Got item: ${coupon.name}.`)
       }
     }).catch(message => {
       error = true
       kwgh.message('error', message)
     }).finally(() => {
-      if (!isBusy || error && !kwgh.config.ignoreError || !kwgh.config.autoRun || kwgh.config.autoRun && remainCoin < playCoinConsume) {
+      if (!isBusy || error && !kwgh.config.ignoreError || kwgh.config.autoRun === false || kwgh.config.autoRun !== false && remainCoin < playCoinConsume) {
         isBusy = false
         kwgh.loading(false)
         kwgh.btnLoading('#kwgh-btn-play', false)
-        if (!kwgh.config.autoRun || error) {
+        if (!kwgh.config.autoRun === false || error) {
           return
         }
         kwgh.message('success', `Working end. Got ${getCount} items.`)
