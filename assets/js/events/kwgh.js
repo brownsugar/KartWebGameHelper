@@ -191,7 +191,7 @@
         url: url,
         type: 'POST',
         contentType: contentTypes[type] + '; charset=UTF-8',
-        async: false,
+        async: true,
         data: payload,
         dataType: dataType || 'json',
         success: success,

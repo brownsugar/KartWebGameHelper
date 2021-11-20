@@ -89,7 +89,7 @@
         isBusy = false
         kwgh.loading(false)
         kwgh.btnLoading('#kwgh-btn-play', false)
-        if (!kwgh.config.autoRun === false || error) {
+        if (kwgh.config.autoRun === false || error) {
           return
         }
         kwgh.message('success', `Working end. Got ${getCount} items.`)
