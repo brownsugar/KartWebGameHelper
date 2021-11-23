@@ -93,7 +93,7 @@
       // Change page data
       remainCoin = remainCoin - playCoinConsume
       remainCoinEl.innerText = remainCoin
-      if (target < current) {
+      if (Number(target) < Number(current)) {
         remainBonus++
         remainBonusEl.innerText = remainBonus
       }
