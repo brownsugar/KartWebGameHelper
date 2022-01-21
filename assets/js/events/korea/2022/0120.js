@@ -1,14 +1,12 @@
 (() => {
-  // All features are same as 2020/01/23 version.
-
-  const EVENT_KEY = 'kwgh-korea-2021-0916'
+  const EVENT_KEY = 'kwgh-korea-2022-0120'
   const playCoinConsume = 4
   const requestInterval = 600
   let isBusy = false
 
   kwgh.init({
     eventKey: EVENT_KEY,
-    date: '2021/09/25',
+    date: '2022/01/21',
     play: play,
     load: load
   })
@@ -17,7 +15,28 @@
   const remainCoinEl = kwgh.el.q('.num1')
   const totalCoinEl = kwgh.el.q('.num2')
   const finishRoundEl = kwgh.el.q('.num3')
-  kwgh.ev(EVENT_KEY, 'jewelry', 'count', parseInt(totalCoinEl.innerText))
+
+  let remainCoin = 0
+  let totalCoin = 0
+  async function initEvent() {
+    await kwgh.ajax.post('AjaxYutNori.aspx', {
+      data: {
+        strType: 'info',
+        // https://kart.nexon.com/events/2022/0120/YutNori.js
+        PositionCur: PositionCur || 0,
+        rd: Math.random()
+      },
+      success: result => {
+        if (result && result.Data[0]) {
+          const data = result.Data[0]
+          remainCoin = Number(data.n4GemNowCnt)
+          totalCoin = Number(data.n4TotalGemCnt)
+          kwgh.ev(EVENT_KEY, 'jewelry', 'count', totalCoin)
+        }
+      }
+    })
+  }
+  initEvent()
 
   let getCount
   function play() {
@@ -61,6 +80,7 @@
       // Change page data
       remainCoin = data.n4GemNowCnt
       remainCoinEl.innerText = remainCoin
+      totalCoinEl.innerText = data.n4TotalGemCnt
       finishRoundEl.innerText = data.n4CompleteCnt
 
       if (!data.strCouponSN) {
@@ -116,12 +136,7 @@
               resolve(result.Data[0])
             }
             else if (result.Return.n4Return <= 0 && result.Return.strReturnValue) {
-              if (result.Return.n4Return == -801) {
-                return reject('Not loggined.')
-              }
-              else {
-                return reject(result.Return.strReturnValue)
-              }
+              return reject(result.Return.strReturnValue)
             }
             else {
               return reject('Unknown error.')
@@ -190,7 +205,7 @@
               const total = result.TotalCount
               if (total > 0 && result.Data.length > 0) {
                 resolve({
-                  totalPage: Math.ceil(total / 6),
+                  totalPage: Math.ceil(total / 4),
                   totalItem: total,
                   couponList: result.Data
                 })
@@ -201,12 +216,7 @@
             }
             else {
               if (result.Return.n4Return <= 0 && result.Return.strReturnValue != null) {
-                if (result.Return.n4Return == -801) {
-                  return reject('Not loggined.')
-                }
-                else {
-                  return reject(result.Return.strReturnValue)
-                }
+                return reject(result.Return.strReturnValue)
               }
               else {
                 return reject('Unknown error.')

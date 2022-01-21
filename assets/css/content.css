@@ -14,6 +14,7 @@
   display: inline;
 }
 .kwgh-wrap .btn-close {
+  position: relative;
   background: none;
   text-indent: 0;
   overflow: visible;
