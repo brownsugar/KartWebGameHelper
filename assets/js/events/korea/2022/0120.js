@@ -84,7 +84,7 @@
       finishRoundEl.innerText = data.n4CompleteCnt
 
       if (!data.strCouponSN) {
-        if(!kwgh.config.autoRun) {
+        if (kwgh.config.autoRun === false) {
           kwgh.toast('secondary', `Got nothing.`)
         }
         return
