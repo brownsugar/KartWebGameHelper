@@ -1,6 +1,9 @@
 (() => {
   const eventPageRegex = {
-    korea: [/\/Events\/(\d+)\/(\d+)\//i, /\/League\/(\d+)\/([^/]+)\/Media/i],
+    korea: [
+      /\/Events\/(\d+)\/(\d+)\//i, /\/League\/(\d+)\/([^/]+)\/Media/i,
+      /(krl)\/(Media)\/Contents/i
+    ],
     taiwan: [/\/KartRider\/(?:Event\/)?E(\d{4})(\d{4})\/(index|SearchItem)\./i],
     china: [/evt0(\d)\.tiancity\.com\/kart\/(\d+)\//i]
   }

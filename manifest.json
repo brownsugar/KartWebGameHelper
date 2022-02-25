@@ -2,7 +2,7 @@
   "manifest_version": 2,
   "name": "KartRider Web Game Helper",
   "short_name": "KartWebGameHelper",
-  "version": "0.23.0",
+  "version": "0.24.0",
   "description": "Just an assistant for KartRider web-based games.",
   "icons": {
     "128": "assets/img/icon.png"
@@ -13,6 +13,7 @@
   "content_scripts": [{
     "matches": [
       "https://kart.nexon.com/*",
+      "https://kartrideresports.nexon.com/*",
       "https://tw.beanfun.com/*",
       "https://event.beanfun.com/*",
       "https://tw-event.beanfun.com/*",

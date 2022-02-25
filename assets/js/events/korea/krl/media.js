@@ -1,9 +1,9 @@
 (() => {
-  const EVENT_KEY = 'kwgh-korea-2022-season1'
+  const EVENT_KEY = 'kwgh-korea-krl-media'
 
   kwgh.init({
     eventKey: EVENT_KEY,
-    date: '2022/01/21'
+    date: '2022/02/25'
   })
 
   window.onload = () => {

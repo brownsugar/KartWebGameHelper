@@ -295,7 +295,7 @@
     const isLogin = !!kwgh.el.q('#gnbMyInfo') || // NEXON
                     !!kwgh.el.q('.nick') // NAVER
 
-    const isLive = window.isLiveVod
+    const isLive = window.IsLive
 
     // Check if is logined or live event starts
     if (!isLogin || !isLive) {
@@ -321,9 +321,9 @@
       const emblemWrap = kwgh.el.q('.emblem')
       const emblem = kwgh.el.q('.emblem a')
       if (emblemWrap.style.display !== 'none' && emblem !== null) {
-        window.emblemEventApply(emblem)
+        window.LeagueEmblem && window.LeagueEmblem.EmblemClick()
       }
-      const emblemGot = kwgh.el.qa('.emb_list .emb_get').length
+      const emblemGot = kwgh.el.qa('.em_list .media_sp.acquisition').length
       if (emblemGot === 4) {
         clearInterval(interval)
         kwgh.toast('success', 'Done! You\'ve collected 4 league emblems.', 0)
