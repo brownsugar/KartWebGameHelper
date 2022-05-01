@@ -58,8 +58,6 @@
       //   "EventCoin": 508
       // }
 
-      const item = data.ItemList[0]
-
       // Change page data
       remainCoin = data.EventCoin
       remainCoinEl.innerHTML = remainCoin.toLocaleString()
@@ -68,6 +66,7 @@
       const totalCoin = data.InGameCoin
       totalCoinEl.innerHTML = totalCoin.toLocaleString()
 
+      const item = data.ItemList[0]
       const coupon = {
         id: item.itemNo,
         name: item.itemName,
